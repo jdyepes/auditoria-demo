@@ -1,0 +1,35 @@
+﻿@page
+@model AuditsIndexModel
+@{
+    ViewData["Title"] = "Auditorías";
+}
+<h2>Auditorías</h2>
+
+<form method="get" class="row g-2">
+    <div class="col"><input type="date" name="start" class="form-control" /></div>
+    <div class="col"><input type="date" name="end" class="form-control" /></div>
+    <div class="col">
+        <select name="status" class="form-select">
+            <option value="0">Pendiente</option>
+            <option value="1">En progreso</option>
+            <option value="2">Completada</option>
+        </select>
+    </div>
+    <div class="col"><button class="btn btn-primary">Buscar</button></div>
+</form>
+
+<table class="table table-striped mt-3">
+    <thead><tr><th>Título</th><th>Fechas</th><th>Área</th><th>Responsable</th><th>Estado</th></tr></thead>
+    <tbody>
+        @foreach (var a in Model.Items)
+        {
+            <tr>
+                <td>@a.Title</td>
+                <td>@a.StartDate.ToShortDateString() - @a.EndDate.ToShortDateString()</td>
+                <td>@a.AuditedArea</td>
+                <td>@a.Owner?.Name</td>
+                <td>@a.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

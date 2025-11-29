@@ -24,5 +24,13 @@ namespace Auditing.Domain.Entities
                 Area = area.Trim()
             };
         }
+
+        public void Update(string name, string email, string area)
+        {
+            Name = name.Trim();
+            Email = email.Trim().ToLower();
+            Area = area.Trim();
+        }
+
     }
 }

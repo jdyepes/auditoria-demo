@@ -1,0 +1,20 @@
+﻿@page
+@model OwnersIndexModel
+@{
+    ViewData["Title"] = "Responsables";
+}
+<h2>Responsables</h2>
+
+<table class="table table-striped mt-3">
+    <thead><tr><th>Nombre</th><th>Email</th><th>Área</th></tr></thead>
+    <tbody>
+        @foreach (var o in Model.Items)
+        {
+            <tr>
+                <td>@o.Name</td>
+                <td>@o.Email</td>
+                <td>@o.Area</td>
+            </tr>
+        }
+    </tbody>
+</table>

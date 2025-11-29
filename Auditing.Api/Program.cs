@@ -12,10 +12,11 @@ builder.Services.AddDbContext<AuditingDbContext>(opt =>
 
 // Repositorios
 builder.Services.AddScoped<IAuditRepository, AuditRepository>();
-
+builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 
 // Servicios de aplicación
 builder.Services.AddScoped<AuditAppService>();
+builder.Services.AddScoped<OwnerAppService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
