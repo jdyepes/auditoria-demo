@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // HttpClient hacia API
 builder.Services.AddHttpClient("api", c =>
-    c.BaseAddress = new Uri("https://localhost:5001/")); // puerto de API
+    c.BaseAddress = new Uri("https://localhost:7063/")); // puerto de API
 
 
 // Add services to the container.

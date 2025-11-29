@@ -29,5 +29,14 @@ namespace Auditing.Domain.Entities
                 DetectionDate = detectionDate.Date
             };
         }
+
+        public void Update(string description, FindingType type, SeverityLevel severity, DateTime detectionDate)
+        {
+            Description = description.Trim();
+            Type = type;
+            Severity = severity;
+            DetectionDate = detectionDate.Date;
+        }
+
     }
 }
