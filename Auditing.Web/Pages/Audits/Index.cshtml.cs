@@ -11,7 +11,15 @@ public class AuditsIndexModel : PageModel
     public async Task OnGet(DateTime? start, DateTime? end, int? status)
     {
         var client = _http.CreateClient("api");
-        var url = $"api/audits/range?start={start:yyyy-MM-dd}&end={end:yyyy-MM-dd}&status={(status ?? 0)}";
+
+        var now = DateTime.Today;
+        var firstDay = new DateTime(now.Year, now.Month, 1);
+        var lastDay = firstDay.AddMonths(1).AddDays(-1);
+
+        var startDate = start ?? firstDay;
+        var endDate = end ?? lastDay;
+
+        var url = $"api/audits/range?start={startDate:yyyy-MM-dd}&end={endDate:yyyy-MM-dd}&status={(status ?? 0)}";
         Items = await client.GetFromJsonAsync<List<AuditVm>>(url) ?? new();
     }
 }
@@ -24,4 +32,5 @@ public class AuditVm
     public string AuditedArea { get; set; } = default!;
     public int Status { get; set; }
     public OwnerVm? Owner { get; set; }
+    public string Area { get; set; } = default!;
 }

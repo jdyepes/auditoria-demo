@@ -3,10 +3,17 @@
 @{
     ViewData["Title"] = "Responsables";
 }
+
 <h2>Responsables</h2>
 
-<table class="table table-striped mt-3">
-    <thead><tr><th>Nombre</th><th>Email</th><th>Área</th></tr></thead>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Área</th>
+        </tr>
+    </thead>
     <tbody>
         @foreach (var o in Model.Items)
         {
@@ -18,3 +25,9 @@
         }
     </tbody>
 </table>
+
+<div class="mt-4 text-center">
+    <a asp-page="/Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle me-1"></i> Volver al inicio
+    </a>
+</div>

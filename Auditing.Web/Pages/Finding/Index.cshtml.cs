@@ -24,7 +24,7 @@ public class FindingsIndexModel : PageModel
         }
         else if (auditId.HasValue)
         {
-            // fallback: traer todos los hallazgos de esa auditoría
+            // Si no hay severidad, traemos todos los hallazgos con severidad 0 (bajo) como fallback
             Items = await client.GetFromJsonAsync<List<FindingVm>>(
                 $"api/findings/audit/{auditId}/severity/0") ?? new();
         }

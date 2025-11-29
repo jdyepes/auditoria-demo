@@ -3,33 +3,69 @@
 @{
     ViewData["Title"] = "Auditorías";
 }
+
 <h2>Auditorías</h2>
 
-<form method="get" class="row g-2">
-    <div class="col"><input type="date" name="start" class="form-control" /></div>
-    <div class="col"><input type="date" name="end" class="form-control" /></div>
-    <div class="col">
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="date" name="start" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <input type="date" name="end" class="form-control" />
+    </div>
+    <div class="col-md-4">
         <select name="status" class="form-select">
+            <option value="">-- Estado --</option>
             <option value="0">Pendiente</option>
-            <option value="1">En progreso</option>
+            <option value="1">En Proceso</option>
             <option value="2">Completada</option>
         </select>
     </div>
-    <div class="col"><button class="btn btn-primary">Buscar</button></div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+
 </form>
 
-<table class="table table-striped mt-3">
-    <thead><tr><th>Título</th><th>Fechas</th><th>Área</th><th>Responsable</th><th>Estado</th></tr></thead>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Área</th>
+            <th>Responsable</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
     <tbody>
-        @foreach (var a in Model.Items)
+        @foreach (var audit in Model.Items)
         {
             <tr>
-                <td>@a.Title</td>
-                <td>@a.StartDate.ToShortDateString() - @a.EndDate.ToShortDateString()</td>
-                <td>@a.AuditedArea</td>
-                <td>@a.Owner?.Name</td>
-                <td>@a.Status</td>
+                <td>@audit.Title</td>
+                <td>@audit.Area</td>
+                <td>@audit.Owner?.Name</td>
+                <td>
+                    @if (audit.Status == 0)
+                    {
+                        <span class="badge bg-secondary">Pendiente</span>
+                    }
+                    else if (audit.Status == 1)
+                    {
+
+                        <span class="badge bg-warning">En Proceso</span>
+                    }
+                    else
+                    {
+
+                        <span class="badge bg-success">Completada</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="mt-4 text-center">
+    <a asp-page="/Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle me-1"></i> Volver al inicio
+    </a>
+</div>
