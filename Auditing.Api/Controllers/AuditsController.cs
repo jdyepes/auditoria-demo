@@ -21,11 +21,27 @@ namespace Auditing.Api.Controllers
             Ok(await _service.UpdateAsync(id, dto));
 
         [HttpPatch("{id:int}/status")]
-        public async Task<IActionResult> ChangeStatus(int id, [FromQuery] AuditStatus status) =>
-            Ok(await _service.ChangeStatusAsync(id, status));
+        public async Task<IActionResult> ChangeStatus(int id, [FromQuery] int status)
+        {
+            if (!Enum.IsDefined(typeof(AuditStatus), status))
+                return BadRequest("Estado inválido.");
+
+            var auditStatus = (AuditStatus)status;
+
+            var result = await _service.ChangeStatusAsync(id, auditStatus);
+            return Ok(result);
+        }
+
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var audit = await _service.GetByIdAsync(id);
+            return audit is null ? NotFound() : Ok(audit);
+        }
 
         [HttpGet("range")]
-        public async Task<IActionResult> ByRange([FromQuery] DateTime start, [FromQuery] DateTime end, [FromQuery] int status) =>
+        public async Task<IActionResult> ByRange([FromQuery] DateTime start, [FromQuery] DateTime end, [FromQuery] int? status) =>
             Ok(await _service.GetByDateRangeAndStatusAsync(new AuditQueryDto(start, end, status)));
 
         [HttpGet("owner/{ownerId:int}")]

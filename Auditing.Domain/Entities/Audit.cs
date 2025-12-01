@@ -18,7 +18,7 @@ namespace Auditing.Domain.Entities
         public ICollection<Finding> Findings { get; private set; } = new List<Finding>(); // Hallazgos
 
         // Fábrica con invariantes
-        public static Audit Create(string title, DateTime startDate, DateTime endDate, string auditedArea, int ownerId)
+        public static Audit Create(string title, DateTime startDate, DateTime endDate, string auditedArea, int ownerId, AuditStatus status)
         {
             if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title is required");
             if (string.IsNullOrWhiteSpace(auditedArea)) throw new ArgumentException("AuditedArea is required");
@@ -32,22 +32,25 @@ namespace Auditing.Domain.Entities
                 EndDate = endDate.Date,
                 AuditedArea = auditedArea.Trim(),
                 OwnerId = ownerId,
-                Status = AuditStatus.Pending
+                Status = status
             };
         }
 
         // Actualización permitida solo en estado Pending
-        public void Update(string title, DateTime startDate, DateTime endDate, string auditedArea)
+        public void Update(string title, DateTime startDate, DateTime endDate, string auditedArea, int ownerId)
         {
             if (Status != AuditStatus.Pending) throw new InvalidOperationException("Only Pending audits can be updated");
             if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title is required");
             if (string.IsNullOrWhiteSpace(auditedArea)) throw new ArgumentException("AuditedArea is required");
             if (endDate.Date < startDate.Date) throw new ArgumentException("EndDate must be >= StartDate");
+            if (ownerId <= 0) throw new ArgumentException("OwnerId must be a positive value");
 
             Title = title.Trim();
             StartDate = startDate.Date;
             EndDate = endDate.Date;
             AuditedArea = auditedArea.Trim();
+            UpdatedAtUtc = DateTime.UtcNow;
+            OwnerId = ownerId;
             UpdatedAtUtc = DateTime.UtcNow;
         }
 

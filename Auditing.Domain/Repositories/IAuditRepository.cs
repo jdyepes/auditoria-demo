@@ -8,7 +8,7 @@ namespace Auditing.Domain.Repositories
         Task<Audit?> GetByIdAsync(int id);
         Task AddAsync(Audit audit);
         Task UpdateAsync(Audit audit);
-        Task<List<Audit>> GetByDateRangeAndStatusAsync(DateTime start, DateTime end, int status);
+        Task<List<Audit>> GetByDateRangeAndStatusAsync(DateTime start, DateTime end, int? status);
         Task<List<Audit>> GetByOwnerAsync(int ownerId);
     }
 }

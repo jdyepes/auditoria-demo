@@ -1,0 +1,89 @@
+﻿@page
+@model CreateAuditsModel
+@{
+    ViewData["Title"] = "Nueva Auditoría";
+}
+
+<h2>Auditoría</h2>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Título</label>
+        <input asp-for="Input.Title" class="form-control" />
+        <span asp-validation-for="Input.Title" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Área Auditada</label>
+        @if (Model.AreaList.Any())
+        {
+            <select asp-for="Input.AuditedArea" class="form-select">
+                <option value="">Seleccione un área</option>
+                @foreach (var area in Model.AreaList)
+                {
+                    <option value="@area">@area</option>
+                }
+            </select>
+        }
+        else
+        {
+            <input asp-for="Input.AuditedArea" class="form-control" placeholder="Registrar nueva área" />
+        }
+        <span asp-validation-for="Input.AuditedArea" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Fecha de inicio</label>
+        <input asp-for="Input.StartDate" type="date" class="form-control" />
+        <span asp-validation-for="Input.StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Fecha de fin</label>
+        <input asp-for="Input.EndDate" type="date" class="form-control" />
+        <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Responsable</label>
+        <select asp-for="Input.OwnerId" class="form-select">
+            <option value="">Seleccione un responsable</option>
+            @foreach (var o in Model.OwnerList)
+            {
+                <option value="@o.Id">@o.Name (@o.Area)</option>
+            }
+        </select>
+        <span asp-validation-for="Input.OwnerId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Estado</label>
+        <select asp-for="Input.Status" class="form-select">
+            <option value="0">Pendiente</option>
+            <option value="1">En Proceso</option>
+            <option value="2">Finalizada</option>
+        </select>
+        <span asp-validation-for="Input.Status" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Volver al inicio</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -17,11 +17,13 @@ namespace Auditing.Application.Services
         }
 
         public async Task<Audit> CreateAsync(AuditCreateDto dto)
-        {
+        {            
             var owner = await _owners.GetByIdAsync(dto.OwnerId)
                 ?? throw new ArgumentException("Owner not found");
 
-            var audit = Audit.Create(dto.Title, dto.StartDate, dto.EndDate, dto.AuditedArea, dto.OwnerId);
+            var status = dto.Status == 0 ? AuditStatus.Pending : (AuditStatus)dto.Status;
+
+            var audit = Audit.Create(dto.Title, dto.StartDate, dto.EndDate, dto.AuditedArea, dto.OwnerId, status);
             await _audits.AddAsync(audit);
             return audit;
         }
@@ -31,7 +33,7 @@ namespace Auditing.Application.Services
             var audit = await _audits.GetByIdAsync(id)
                 ?? throw new KeyNotFoundException("Audit not found");
 
-            audit.Update(dto.Title, dto.StartDate, dto.EndDate, dto.AuditedArea);
+            audit.Update(dto.Title, dto.StartDate, dto.EndDate, dto.AuditedArea, dto.OwnerId);
             await _audits.UpdateAsync(audit);
             return audit;
         }
@@ -41,10 +43,32 @@ namespace Auditing.Application.Services
             var audit = await _audits.GetByIdAsync(id)
                 ?? throw new KeyNotFoundException("Audit not found");
 
+            // Si el newStatus es igual al actual, lo interpretamos como instrucción para avanzar
+            if (newStatus == audit.Status)
+            {
+                newStatus = audit.Status switch
+                {
+                    AuditStatus.Pending => AuditStatus.InProgress,
+                    AuditStatus.InProgress => AuditStatus.Completed,
+                    AuditStatus.Completed => throw new InvalidOperationException("La auditoría ya está finalizada."),
+                    _ => throw new ArgumentOutOfRangeException("Estado desconocido.")
+                };
+            }
+
+            //  Validación final
+            if (newStatus < audit.Status)
+                throw new InvalidOperationException("No se puede revertir el estado.");
+
+            if (newStatus > AuditStatus.Completed)
+                throw new ArgumentOutOfRangeException("Estado inválido.");
+
             audit.ChangeStatus(newStatus);
             await _audits.UpdateAsync(audit);
             return audit;
         }
+
+        public async Task<Audit?> GetByIdAsync(int id) =>
+               await _audits.GetByIdAsync(id);
 
         public Task<List<Audit>> GetByDateRangeAndStatusAsync(AuditQueryDto q) =>
             _audits.GetByDateRangeAndStatusAsync(q.StartDate.Date, q.EndDate.Date, q.Status);

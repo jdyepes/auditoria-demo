@@ -56,6 +56,37 @@
     </tbody>
 </table>
 
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Severidad</th>
+            <th>Fecha</th>
+            <th>Cerrado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var f in Model.Items)
+        {
+            <tr>
+                <td>@f.Description</td>
+                <td>@f.Type</td>
+                <td>@(f.Severity == 0 ? "Bajo" : f.Severity == 1 ? "Medio" : "Alto")</td>
+                <td>@f.DetectionDate.ToShortDateString()</td>
+                <td>@(f.IsClosed ? "Sí" : "No")</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@f.Id" class="btn btn-sm btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="Create" asp-route-auditId="@Model.Items.FirstOrDefault()?.AuditId" class="btn btn-success">Agregar Hallazgo</a>
+
+
 <div class="mt-4 text-center">
     <a asp-page="/Index" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left-circle me-1"></i> Volver al inicio

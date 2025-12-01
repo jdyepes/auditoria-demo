@@ -1,5 +1,6 @@
+using Auditing.Web.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http.Json;
+
 
 public class FindingsIndexModel : PageModel
 {
@@ -29,12 +30,4 @@ public class FindingsIndexModel : PageModel
                 $"api/findings/audit/{auditId}/severity/0") ?? new();
         }
     }
-}
-
-public class FindingVm
-{
-    public string Description { get; set; } = default!;
-    public string Type { get; set; } = default!;
-    public int Severity { get; set; }
-    public DateTime DetectionDate { get; set; }
 }

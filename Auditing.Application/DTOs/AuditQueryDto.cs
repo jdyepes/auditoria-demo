@@ -3,5 +3,5 @@
     public record AuditQueryDto(
         DateTime StartDate,
         DateTime EndDate,
-        int Status);
+        int? Status);
 }

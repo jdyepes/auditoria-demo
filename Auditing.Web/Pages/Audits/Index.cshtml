@@ -6,23 +6,39 @@
 
 <h2>Auditorías</h2>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <form method="get" class="row g-3 mb-4">
-    <div class="col-md-4">
-        <input type="date" name="start" class="form-control" />
-    </div>
-    <div class="col-md-4">
-        <input type="date" name="end" class="form-control" />
-    </div>
-    <div class="col-md-4">
-        <select name="status" class="form-select">
-            <option value="">-- Estado --</option>
-            <option value="0">Pendiente</option>
-            <option value="1">En Proceso</option>
-            <option value="2">Completada</option>
-        </select>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    <div class="row mb-3 mt-4">
+        <div class="col-md-3">
+            <label>Fecha inicio</label>
+            <input type="date" asp-for="Start" class="form-control" required />
+        </div>
+        <div class="col-md-3">
+            <label>Fecha fin</label>
+            <input type="date" asp-for="End" class="form-control" required />
+        </div>
+        <div class="col-md-3">
+            <label>Estado</label>
+            <select asp-for="Status" class="form-select">
+                <option value="">-- Estado --</option>
+                <option value="0">Pendiente</option>
+                <option value="1">En Proceso</option>
+                <option value="2">Finalizada</option>
+            </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100" onclick="return validateDates()">Buscar</button>
+        </div>
+        <div class="col-12">
+            <span id="messageError" class="text-danger fw-bold"></span>
+        </div>
     </div>
 
 </form>
@@ -32,8 +48,10 @@
         <tr>
             <th>Título</th>
             <th>Área</th>
-            <th>Responsable</th>
+            <th>Inicio</th>
+            <th>Fin</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -41,14 +59,15 @@
         {
             <tr>
                 <td>@audit.Title</td>
-                <td>@audit.Area</td>
-                <td>@audit.Owner?.Name</td>
+                <td>@audit.AuditedArea</td>
+                <td>@audit.StartDate.ToShortDateString()</td>
+                <td>@audit.EndDate.ToShortDateString()</td>
                 <td>
-                    @if (audit.Status == 0)
+                    @if (audit.Status == Domain.Enums.AuditStatus.Pending)
                     {
                         <span class="badge bg-secondary">Pendiente</span>
                     }
-                    else if (audit.Status == 1)
+                    else if (audit.Status == Domain.Enums.AuditStatus.InProgress)
                     {
 
                         <span class="badge bg-warning">En Proceso</span>
@@ -59,13 +78,64 @@
                         <span class="badge bg-success">Completada</span>
                     }
                 </td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@audit.Id" class="btn btn-sm btn-primary">Editar</a>
+                    <a asp-page="/Finding/Index" asp-route-auditId="@audit.Id" class="btn btn-sm btn-info">Ver Hallazgos</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a asp-page="Create" class="btn btn-success">Agregar Auditoría</a>
+
 
 <div class="mt-4 text-center">
     <a asp-page="/Index" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left-circle me-1"></i> Volver al inicio
     </a>
 </div>
+
+@section Scripts {
+    <script>
+        function validateDates() {
+            const message = document.getElementById("messageError");
+            message.textContent = ""; 
+
+            const start = document.getElementById("startDate").value;
+            const end = document.getElementById("endDate").value;
+            const status = document.querySelector("select[name='status']").value;
+
+
+            if (!start || !end) {
+                message.textContent = "Debe indicar ambas fechas.";
+                return false;
+            }
+
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+
+            if (endDate < startDate) {
+                message.textContent = "La fecha de fin no puede ser menor que la de inicio.";
+                return false;
+            }
+
+            if (startDate.getTime() === endDate.getTime()) {
+                message.textContent = "Las fechas son iguales. Se tomará todo el día.";
+                // No bloquea el envío
+            }
+
+             if (!start || !end) {
+                message.textContent = "Debe indicar ambas fechas.";
+                return false;
+            }
+
+            if (!status || status == "") {
+                message.textContent = "Debe indicar el estado.";
+            }
+
+
+            return true;
+        }
+    </script>
+}

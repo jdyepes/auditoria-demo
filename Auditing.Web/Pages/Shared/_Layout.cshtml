@@ -4,50 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Auditing.Web</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Auditing.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        /* Fondo blanco y tipografía limpia */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
         body {
             background-color: #fff;
             color: #212529;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Navbar con degradado azul oscuro */
-        .navbar {
-            background: linear-gradient(to right, #0d1b2a, #1b263b);
-            color: white;
+        main {
+            flex: 1 0 auto;
         }
 
-            .navbar .nav-link {
-                color: #f8f9fa;
-            }
-
-                .navbar .nav-link:hover {
-                    color: #0dcaf0;
-                }
-
-        /* Cards con estilo limpio y sombra sutil */
-        .card {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-            .card:hover {
-                transform: scale(1.02);
-            }
-
-            .card .btn {
-                font-weight: 500;
-            }
-
-        /* Footer con degradado azul oscuro */
         footer {
+            flex-shrink: 0;
             background: linear-gradient(to right, #0d1b2a, #1b263b);
             color: #f8f9fa;
             font-size: 0.9rem;
@@ -62,6 +44,34 @@
                     color: #0dcaf0;
                     text-decoration: underline;
                 }
+
+        .navbar {
+            background: linear-gradient(to right, #0d1b2a, #1b263b);
+            color: white;
+        }
+
+            .navbar .nav-link {
+                color: #f8f9fa;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #0dcaf0;
+                }
+
+        .card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.02);
+            }
+
+            .card .btn {
+                font-weight: 500;
+            }
     </style>
 </head>
 <body>
@@ -74,20 +84,15 @@
         </div>
     </nav>
 
-    <header>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3 mt-5">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="container py-4">
+        @RenderBody()
+    </main>
 
-    <footer class="border-top footer text-center bg-dark text-light">
+    <footer class="border-top text-center py-3">
         <p class="mb-1">Hecho por <strong>Jesús Yepes</strong> · Auditing Demo · Caracas, Venezuela</p>
-        <p class="mb-1"> Auditing Demo · Caracas, Venezuela</p>
-
+        <p class="mb-1">Auditing Demo · Caracas, Venezuela</p>
         <a href="https://github.com/jdyepes/auditoria-demo" target="_blank" class="text-decoration-none text-info">
-                <i class="fab fa-github fa-lg me-2"></i>github.com/jdyepes
+            <i class="fab fa-github fa-lg me-2"></i>github.com/jdyepes
         </a>
     </footer>
 

@@ -4,5 +4,7 @@
         string Title,
         DateTime StartDate,
         DateTime EndDate,
-        string AuditedArea);
+        string AuditedArea,
+        int OwnerId
+        );
 }

@@ -12,19 +12,42 @@ namespace Auditing.Api.Controllers
         public OwnersController(OwnerAppService service) => _service = service;
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] OwnerCreateDto dto) =>
-            Created("", await _service.CreateAsync(dto));
+        public async Task<IActionResult> Create([FromBody] OwnerCreateDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Email))
+            {
+                return BadRequest("Los campos Nombre/ Email son obligaorios");
+            }
+
+            var result = await _service.CreateAsync(dto);
+            return Ok(result);
+        }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] OwnerUpdateDto dto) =>
-            Ok(await _service.UpdateAsync(id, dto));
+        public async Task<IActionResult> Update(int id, [FromBody] OwnerUpdateDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Area))
+                return BadRequest("Los campos Nombre/ Email son obligaorios");
+
+            var updated = await _service.UpdateAsync(id, dto);
+            if (updated == null) return NotFound();
+            return Ok(updated);
+        }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() =>
-            Ok(await _service.GetAllAsync());
+        public async Task<IActionResult> GetAll()
+        {
+            var owners = await _service.GetAllAsync();
+            return Ok(owners);
+        }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id) =>
-            Ok(await _service.GetByIdAsync(id));
+        public async Task<IActionResult> GetById(int id)
+        {
+            var owner = await _service.GetByIdAsync(id);
+            if (owner == null) return NotFound();
+            return Ok(owner);
+        }
+
     }
 }

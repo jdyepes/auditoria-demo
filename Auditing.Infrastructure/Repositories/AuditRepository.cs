@@ -29,12 +29,19 @@ namespace Auditing.Infrastructure.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public Task<List<Audit>> GetByDateRangeAndStatusAsync(DateTime start, DateTime end, int status) =>
-            _db.Audits
-               .Include(a => a.Owner)
-               .Where(a => a.StartDate >= start && a.EndDate <= end && (int)a.Status == status)
-               .AsNoTracking()
-               .ToListAsync();
+        public Task<List<Audit>> GetByDateRangeAndStatusAsync(DateTime start, DateTime end, int? status)
+        {
+            var query = _db.Audits
+              .Include(a => a.Owner)
+              .Where(a => a.StartDate >= start && a.EndDate <= end);
+
+            if (status.HasValue)
+                query = query.Where(a => (int)a.Status == status.Value);
+
+            return query
+                .AsNoTracking()
+                .ToListAsync();
+        }
 
         public Task<List<Audit>> GetByOwnerAsync(int ownerId) =>
             _db.Audits

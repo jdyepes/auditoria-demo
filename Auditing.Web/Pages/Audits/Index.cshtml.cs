@@ -1,5 +1,6 @@
+using Auditing.Web.Pages.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http.Json;
 
 public class AuditsIndexModel : PageModel
 {
@@ -7,6 +8,16 @@ public class AuditsIndexModel : PageModel
     public AuditsIndexModel(IHttpClientFactory http) => _http = http;
 
     public List<AuditVm> Items { get; set; } = new();
+
+    [BindProperty(SupportsGet = true)]
+    public DateTime? Start { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public DateTime? End { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public int? Status { get; set; }
+
 
     public async Task OnGet(DateTime? start, DateTime? end, int? status)
     {
@@ -21,16 +32,5 @@ public class AuditsIndexModel : PageModel
 
         var url = $"api/audits/range?start={startDate:yyyy-MM-dd}&end={endDate:yyyy-MM-dd}&status={(status ?? 0)}";
         Items = await client.GetFromJsonAsync<List<AuditVm>>(url) ?? new();
-    }
-}
-
-public class AuditVm
-{
-    public string Title { get; set; } = default!;
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public string AuditedArea { get; set; } = default!;
-    public int Status { get; set; }
-    public OwnerVm? Owner { get; set; }
-    public string Area { get; set; } = default!;
+    }   
 }

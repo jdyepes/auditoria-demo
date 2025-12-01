@@ -5,5 +5,7 @@
         DateTime StartDate,
         DateTime EndDate,
         string AuditedArea,
-        int OwnerId);
+        int OwnerId,
+        int Status
+        );
 }

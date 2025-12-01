@@ -1,0 +1,38 @@
+﻿@page
+@model CreateOwnersModel
+@{
+    ViewData["Title"] = "Nuevo Responsable";
+}
+
+<h2>Nuevo Responsable</h2>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Input.Name" class="form-control" />
+        <span asp-validation-for="Input.Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Área</label>
+        <input asp-for="Input.Area" class="form-control" />
+        <span asp-validation-for="Input.Area" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Volver</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

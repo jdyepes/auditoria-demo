@@ -1,5 +1,5 @@
+using Auditing.Web.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http.Json;
 
 public class OwnersIndexModel : PageModel
 {
@@ -13,11 +13,4 @@ public class OwnersIndexModel : PageModel
         var client = _http.CreateClient("api");
         Items = await client.GetFromJsonAsync<List<OwnerVm>>("api/owners") ?? new();
     }
-}
-
-public class OwnerVm
-{
-    public string Name { get; set; } = default!;
-    public string Email { get; set; } = default!;
-    public string Area { get; set; } = default!;
 }
