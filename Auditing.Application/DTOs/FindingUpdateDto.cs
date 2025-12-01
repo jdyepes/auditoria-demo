@@ -6,6 +6,9 @@ namespace Auditing.Application.DTOs
         string Description,
         FindingType Type,
         SeverityLevel Severity,
-        DateTime DetectionDate
+        DateTime DetectionDate,
+        int? OwnerId,
+        bool IsClosed,
+        DateTime? CloseDate
     );
 }

@@ -1,3 +1,4 @@
+using Auditing.Domain.Enums;
 using Auditing.Web.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,7 +32,7 @@ public class EditFindingModel : PageModel
         if (!ModelState.IsValid) return Page();
 
         // Regla: Severidad alta requiere responsable
-        if (Input.Severity == 2 && Input.OwnerId == null)
+        if (Input.Severity == SeverityLevel.High && Input.OwnerId == null)
         {
             ErrorMessage = "Los hallazgos de prioridad alta deben tener un responsable asignado.";
             return Page();

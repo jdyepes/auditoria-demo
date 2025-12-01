@@ -1,4 +1,5 @@
 ﻿@page "{auditId:int}"
+@using Auditing.Domain.Enums
 @model CreateFindingModel
 @{
     ViewData["Title"] = "Nuevo Hallazgo";
@@ -11,6 +12,15 @@
     <div class="alert alert-danger">@Model.ErrorMessage</div>
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
 <form method="post" class="row g-3">
     <input type="hidden" asp-for="Input.AuditId" />
 
@@ -21,20 +31,28 @@
     </div>
 
     <div class="col-md-6">
-        <label class="form-label">Tipo</label>
-        <input asp-for="Input.Type" class="form-control" />
+        <label class="form-label">Tipo de hallazgo</label>
+        <select asp-for="Input.Type" class="form-select">
+            <option value="0">Observación</option>
+            <option value="1">No conformidad</option>
+        </select>
         <span asp-validation-for="Input.Type" class="text-danger"></span>
     </div>
 
+
     <div class="col-md-6">
-        <label class="form-label">Severidad</label>
-        <select asp-for="Input.Severity" class="form-select">
-            <option value="0">Bajo</option>
-            <option value="1">Medio</option>
-            <option value="2">Alto</option>
-        </select>
+        <label class="form-label d-block">Severidad</label>
+        <div class="btn-group" role="group" aria-label="Severidad">
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev0" value="0" @(Model.Input?.Severity == 0 ? "checked" : "")>
+            <label class="btn btn-outline-success" for="sev0">Bajo</label>
+
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev1" value="1" @(Model.Input?.Severity == SeverityLevel.Medium ? "checked" : "")>
+            <label class="btn btn-outline-warning" for="sev1">Medio</label>
+
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev2" value="2" @(Model.Input?.Severity == SeverityLevel.High ? "checked" : "")>
+            <label class="btn btn-outline-danger" for="sev2">Alto</label>
+        </div>
         <span asp-validation-for="Input.Severity" class="text-danger"></span>
-        <div class="form-text">Severidad alta requiere responsable.</div>
     </div>
 
     <div class="col-md-6">

@@ -1,3 +1,4 @@
+using Auditing.Domain.Enums;
 using Auditing.Web.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,6 +17,7 @@ public class CreateFindingModel : PageModel
     public async Task OnGet(int auditId)
     {
         Input.AuditId = auditId;
+        Input.DetectionDate = DateTime.Today;
 
         var client = _http.CreateClient("api");
         OwnerList = await client.GetFromJsonAsync<List<OwnerVm>>("api/owners") ?? new();
@@ -26,7 +28,7 @@ public class CreateFindingModel : PageModel
         if (!ModelState.IsValid) return Page();
 
         // Regla: Severidad alta requiere responsable
-        if (Input.Severity == 2 && Input.OwnerId == null)
+        if (Input.Severity == SeverityLevel.High && Input.OwnerId == null)
         {
             ErrorMessage = "Los hallazgos de prioridad alta deben tener un responsable asignado.";
             return Page();
@@ -44,6 +46,7 @@ public class CreateFindingModel : PageModel
         {
             var response = await client.PostAsJsonAsync("api/findings", Input);
             response.EnsureSuccessStatusCode();
+            TempData["SuccessMessage"] = "Hallazgo creado correctamente.";
             return RedirectToPage("Index", new { auditId = Input.AuditId });
         }
         catch (HttpRequestException ex)

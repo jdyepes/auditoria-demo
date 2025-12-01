@@ -32,6 +32,12 @@ namespace Auditing.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var audit = await _service.GetAllAsync();
+            return audit is null ? NotFound() : Ok(audit);
+        }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)

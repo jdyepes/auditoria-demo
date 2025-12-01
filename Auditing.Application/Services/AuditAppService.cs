@@ -67,6 +67,9 @@ namespace Auditing.Application.Services
             return audit;
         }
 
+        public async Task<List<Audit>> GetAllAsync() =>
+             await _audits.GetAllAsync();
+
         public async Task<Audit?> GetByIdAsync(int id) =>
                await _audits.GetByIdAsync(id);
 

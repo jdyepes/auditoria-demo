@@ -5,6 +5,7 @@ namespace Auditing.Domain.Repositories
     // Contrato de persistencia para auditorías
     public interface IAuditRepository
     {
+        Task<List<Audit>> GetAllAsync();
         Task<Audit?> GetByIdAsync(int id);
         Task AddAsync(Audit audit);
         Task UpdateAsync(Audit audit);

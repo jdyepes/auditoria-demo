@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Auditing.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Auditing.Web.Pages.ViewModels
 {
@@ -13,11 +14,11 @@ namespace Auditing.Web.Pages.ViewModels
         public string Description { get; set; } = default!;
 
         [Required]
-        public string Type { get; set; } = default!;
+        public FindingType Type { get; set; } = default!; // 0 = Observacion, 1 = No conforme
 
         [Required]
         [Range(0, 2)]
-        public int Severity { get; set; } // 0 = Bajo, 1 = Medio, 2 = Alto
+        public SeverityLevel Severity { get; set; } // 0 = Bajo, 1 = Medio, 2 = Alto
 
         [Required]
         public DateTime DetectionDate { get; set; }

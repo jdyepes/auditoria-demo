@@ -11,6 +11,10 @@ namespace Auditing.Infrastructure.Repositories
         private readonly AuditingDbContext _db;
         public AuditRepository(AuditingDbContext db) => _db = db;
 
+        public Task<List<Audit>> GetAllAsync() =>
+           _db.Audits
+            .AsNoTracking().ToListAsync();
+
         public Task<Audit?> GetByIdAsync(int id) =>
             _db.Audits
                .Include(a => a.Owner)

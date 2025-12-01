@@ -1,4 +1,5 @@
-﻿@page "{auditId:int?}"
+﻿@page
+@using Auditing.Domain.Enums
 @model FindingsIndexModel
 @{
     ViewData["Title"] = "Hallazgos";
@@ -6,15 +7,42 @@
 
 <h2>Hallazgos</h2>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <form method="get" class="mb-3">
     <div class="input-group">
-        <input type="number" name="auditId" value="@Model.AuditId" class="form-control" placeholder="Audit ID" />
+        <!-- Dropdown dinámico de auditorías -->
+        <select name="auditId" class="form-select">
+            <option value="">-- Seleccione Auditoría --</option>
+            @{
+                foreach (var audit in Model.Audits)
+                {
+                    var selected = audit.Id == Model.AuditId ? "selected=\"selected\"" : "";
+                    @Html.Raw($"<option value=\"{audit.Id}\" {selected}>{audit.Title} ({audit.Id})</option>")
+                }
+            }
+        </select>
+
+        <!-- Filtro de severidad -->
         <select name="severity" class="form-select">
             <option value="">-- Severidad --</option>
-            <option value="0">Bajo</option>
-            <option value="1">Medio</option>
-            <option value="2">Alto</option>
+            @{
+                var severity = Model.Severity;
+                var severities = new[] { "Bajo", "Medio", "Alto" };
+                for (int i = 0; i < severities.Length; i++)
+                {
+                    var selected = severity == i ? "selected=\"selected\"" : "";
+                    @Html.Raw($"<option value=\"{i}\" {selected}>{severities[i]}</option>")
+                }
+            }
         </select>
+
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </div>
 </form>
@@ -39,14 +67,12 @@
                     {
                         <span class="badge bg-success">Bajo</span>
                     }
-                    else if (f.Severity == 1)
+                    else if (f.Severity == SeverityLevel.Medium)
                     {
-
                         <span class="badge bg-warning">Medio</span>
                     }
                     else
                     {
-
                         <span class="badge bg-danger">Alto</span>
                     }
                 </td>
@@ -56,36 +82,7 @@
     </tbody>
 </table>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Descripción</th>
-            <th>Tipo</th>
-            <th>Severidad</th>
-            <th>Fecha</th>
-            <th>Cerrado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var f in Model.Items)
-        {
-            <tr>
-                <td>@f.Description</td>
-                <td>@f.Type</td>
-                <td>@(f.Severity == 0 ? "Bajo" : f.Severity == 1 ? "Medio" : "Alto")</td>
-                <td>@f.DetectionDate.ToShortDateString()</td>
-                <td>@(f.IsClosed ? "Sí" : "No")</td>
-                <td>
-                    <a asp-page="Edit" asp-route-id="@f.Id" class="btn btn-sm btn-primary">Editar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-page="Create" asp-route-auditId="@Model.Items.FirstOrDefault()?.AuditId" class="btn btn-success">Agregar Hallazgo</a>
-
+<a asp-page="Create" asp-route-auditId="@Model.AuditId" class="btn btn-success">Agregar Hallazgo</a>
 
 <div class="mt-4 text-center">
     <a asp-page="/Index" class="btn btn-outline-secondary">
