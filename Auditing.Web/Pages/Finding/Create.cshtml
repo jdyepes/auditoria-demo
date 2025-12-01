@@ -1,0 +1,96 @@
+﻿@page "{auditId:int}"
+@using Auditing.Domain.Enums
+@model CreateFindingModel
+@{
+    ViewData["Title"] = "Nuevo Hallazgo";
+}
+
+<h2>Nuevo Hallazgo</h2>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="Input.AuditId" />
+
+    <div class="col-md-12">
+        <label class="form-label">Descripción</label>
+        <textarea asp-for="Input.Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Input.Description" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Tipo de hallazgo</label>
+        <select asp-for="Input.Type" class="form-select">
+            <option value="0">Observación</option>
+            <option value="1">No conformidad</option>
+        </select>
+        <span asp-validation-for="Input.Type" class="text-danger"></span>
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label d-block">Severidad</label>
+        <div class="btn-group" role="group" aria-label="Severidad">
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev0" value="0" @(Model.Input?.Severity == 0 ? "checked" : "")>
+            <label class="btn btn-outline-success" for="sev0">Bajo</label>
+
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev1" value="1" @(Model.Input?.Severity == SeverityLevel.Medium ? "checked" : "")>
+            <label class="btn btn-outline-warning" for="sev1">Medio</label>
+
+            <input type="radio" class="btn-check" name="Input.Severity" id="sev2" value="2" @(Model.Input?.Severity == SeverityLevel.High ? "checked" : "")>
+            <label class="btn btn-outline-danger" for="sev2">Alto</label>
+        </div>
+        <span asp-validation-for="Input.Severity" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Fecha de detección</label>
+        <input asp-for="Input.DetectionDate" type="date" class="form-control" />
+        <span asp-validation-for="Input.DetectionDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Responsable</label>
+        <select asp-for="Input.OwnerId" class="form-select">
+            <option value="">Sin asignar</option>
+            @foreach (var owner in Model.OwnerList)
+            {
+                <option value="@owner.Id">@owner.Name</option>
+            }
+        </select>
+        <span asp-validation-for="Input.OwnerId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-check mt-4">
+            <input asp-for="Input.IsClosed" class="form-check-input" id="isClosedCreate" />
+            <label class="form-check-label" for="isClosedCreate">¿Hallazgo cerrado?</label>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Fecha de cierre</label>
+        <input asp-for="Input.CloseDate" type="date" class="form-control" />
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a asp-page="/Index" class="btn btn-outline-secondary">Volver al inicio</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

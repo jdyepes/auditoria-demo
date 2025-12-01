@@ -1,0 +1,40 @@
+﻿@page
+@model OwnersIndexModel
+@{
+    ViewData["Title"] = "Responsables";
+}
+
+<h2>Responsables</h2>
+
+<table class="table table-striped table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Área</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model.Items)
+        {
+            <tr>
+                <td>@o.Name</td>
+                <td>@o.Email</td>
+                <td>@o.Area</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@o.Id" class="btn btn-sm btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="Create" class="btn btn-success">Agregar Responsable</a>
+
+
+<div class="mt-4 text-center">
+    <a asp-page="/Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle me-1"></i> Volver al inicio
+    </a>
+</div>

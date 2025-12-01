@@ -1,10 +1,44 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Auditing Demo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Auditing Demo</h1>
+
+    <div class="row g-4 mb-5">
+        <!-- Owners -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Responsables</h5>
+                    <p class="card-text">Gestión de responsables de auditorías.</p>
+                    <a asp-page="/Owners/Index" class="btn btn-outline-primary w-100">Ver Owners</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audits -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Auditorías</h5>
+                    <p class="card-text">Listado y control de auditorías.</p>
+                    <a asp-page="/Audits/Index" class="btn btn-outline-success w-100">Ver Audits</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Findings -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Hallazgos</h5>
+                    <p class="card-text">Consulta de hallazgos por auditoría.</p>
+                    <a asp-page="/Finding/Index" asp-route-auditId="1" class="btn btn-outline-danger w-100">Ver Findings</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
