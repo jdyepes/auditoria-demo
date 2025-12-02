@@ -74,10 +74,6 @@ dotnet run
 ## Evidencias de pruebas unitarias
 - **Pantallazo IDE:**  
   ![Resultados en IDE](backend/docs/img/test-results-ide.png)
-- **Reporte TRX y cobertura:**  
-  - TRX: `backend/TestResults/test_results.trx`  
-  - Cobertura HTML: `backend/coveragereport/index.htm`  
-  - Snapshot: ![Cobertura](backend/docs/img/coverage-report.png)
 
 ## Descripción técnica de la solución - Patron DDD
 - **Arquitectura:** (Controllers → Services → Repositories/Infrastructure → Domain).  
