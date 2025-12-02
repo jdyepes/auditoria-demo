@@ -17,6 +17,18 @@ namespace Auditing.Domain.Entities
         public DateTime? UpdatedAtUtc { get; private set; }                     // Última actualización
         public ICollection<Finding> Findings { get; private set; } = new List<Finding>(); // Hallazgos
 
+        private Audit() { }
+        public Audit( int ownerId, string title, AuditStatus status, DateTime start, DateTime end)
+        {
+            OwnerId = ownerId;
+            Title = title;
+            Status = status;
+            StartDate = start;
+            EndDate = end;
+        }
+
+        public void ChangeTitle(string newTitle) => Title = newTitle;
+
         // Fábrica con invariantes
         public static Audit Create(string title, DateTime startDate, DateTime endDate, string auditedArea, int ownerId, AuditStatus status)
         {
@@ -25,15 +37,10 @@ namespace Auditing.Domain.Entities
             if (endDate.Date < startDate.Date) throw new ArgumentException("EndDate must be >= StartDate");
             if (ownerId <= 0) throw new ArgumentException("OwnerId must be a positive value");
 
-            return new Audit
-            {
-                Title = title.Trim(),
-                StartDate = startDate.Date,
-                EndDate = endDate.Date,
-                AuditedArea = auditedArea.Trim(),
-                OwnerId = ownerId,
-                Status = status
-            };
+            var audit = new Audit(ownerId, title.Trim(), status, startDate.Date, endDate.Date);
+            audit.AuditedArea = auditedArea.Trim();
+            return audit;
+
         }
 
         // Actualización permitida solo en estado Pending

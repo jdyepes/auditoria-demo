@@ -14,20 +14,29 @@ namespace Auditing.Domain.Entities
         public DateTime DetectionDate { get; private set; }           // Fecha detección
         public DateTime CreatedAtUtc { get; private set; } = DateTime.UtcNow; // Creación
 
+        public Finding() { }
+
+        public Finding(int auditId, SeverityLevel severity, string description)
+        {
+            AuditId = auditId;
+            Severity = severity;
+            Description = description;
+        }
+        public void ChangeDescription(string newDescription) => Description = newDescription;
+        public void ChangeSeverity(SeverityLevel newSeverity) => Severity = newSeverity;
+
         // Fábrica con validaciones
         public static Finding Create(int auditId, string description, FindingType type, SeverityLevel severity, DateTime detectionDate)
         {
             if (auditId <= 0) throw new ArgumentException("AuditId must be a positive value");
             if (string.IsNullOrWhiteSpace(description)) throw new ArgumentException("Description is required");
 
-            return new Finding
-            {
-                AuditId = auditId,
-                Description = description.Trim(),
-                Type = type,
-                Severity = severity,
-                DetectionDate = detectionDate.Date
-            };
+            var finding = new Finding(auditId, severity, description.Trim());
+            finding.Type = type;
+            finding.DetectionDate = detectionDate.Date;
+
+            return finding;
+
         }
 
         public void Update(string description, FindingType type, SeverityLevel severity, DateTime detectionDate)
