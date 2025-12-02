@@ -10,6 +10,19 @@ namespace Auditing.Domain.Entities
         public string Area { get; private set; } = default!;      // Área
         public DateTime CreatedAtUtc { get; private set; } = DateTime.UtcNow; // Creación UTC
 
+        public Owner( string name, string email, string area)
+        {
+            Name = name;
+            Email = email;
+            Area = area;
+        }
+
+        public void ChangeName(string newName)
+        {
+            Name = newName;
+        }
+
+
         // Fábrica con validaciones básicas
         public static Owner Create(string name, string email, string area)
         {
@@ -17,12 +30,7 @@ namespace Auditing.Domain.Entities
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("Email is required");
             if (string.IsNullOrWhiteSpace(area)) throw new ArgumentException("Area is required");
 
-            return new Owner
-            {
-                Name = name.Trim(),
-                Email = email.Trim(),
-                Area = area.Trim()
-            };
+            return new Owner(name.Trim(), email.Trim(), area.Trim());
         }
 
         public void Update(string name, string email, string area)

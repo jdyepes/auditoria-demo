@@ -29,6 +29,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
+		docs\img\test-results-ide.png = docs\img\test-results-ide.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C25F8D43-F551-45F6-9CB5-B4C434DC56D5}"
+	ProjectSection(SolutionItems) = preProject
+		docs\postman\Auditing.Api.postman_collection.json = docs\postman\Auditing.Api.postman_collection.json
+		docs\img\test-results-ide.png = docs\img\test-results-ide.png
 	EndProjectSection
 EndProject
 Global
