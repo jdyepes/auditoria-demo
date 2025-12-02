@@ -1,0 +1,1208 @@
+{
+	"info": {
+		"_postman_id": "d5c4e80e-0bc8-4fcc-a861-08a70a4128f8",
+		"name": "Auditing.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38597637"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "audits",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "/api/audits/:id/status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/audits/:id/status?status=8205",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"audits",
+														":id",
+														"status"
+													],
+													"query": [
+														{
+															"key": "status",
+															"value": "8205"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/audits/:id/status?status=8205",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"audits",
+																":id",
+																"status"
+															],
+															"query": [
+																{
+																	"key": "status",
+																	"value": "8205"
+																}
+															],
+															"variable": [
+																{
+																	"key": "id",
+																	"value": "8205"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/api/audits/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"string\",\n  \"startDate\": \"1989-06-13T01:04:25.396Z\",\n  \"endDate\": \"1949-11-24T16:56:35.110Z\",\n  \"auditedArea\": \"string\",\n  \"ownerId\": 2160\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/audits/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"audits",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"string\",\n  \"startDate\": \"1989-06-13T01:04:25.396Z\",\n  \"endDate\": \"1949-11-24T16:56:35.110Z\",\n  \"auditedArea\": \"string\",\n  \"ownerId\": 2160\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/audits/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"audits",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/audits/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/audits/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"audits",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/audits/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"audits",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "range",
+							"item": [
+								{
+									"name": "/api/audits/range",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/audits/range?start=2005-02-12T12:57:50.586Z&end=2005-02-12T12:57:50.586Z&status=8205",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"audits",
+												"range"
+											],
+											"query": [
+												{
+													"key": "start",
+													"value": "2005-02-12T12:57:50.586Z"
+												},
+												{
+													"key": "end",
+													"value": "2005-02-12T12:57:50.586Z"
+												},
+												{
+													"key": "status",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/audits/range?start=2005-02-12T12:57:50.586Z&end=2005-02-12T12:57:50.586Z&status=8205",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"audits",
+														"range"
+													],
+													"query": [
+														{
+															"key": "start",
+															"value": "2005-02-12T12:57:50.586Z"
+														},
+														{
+															"key": "end",
+															"value": "2005-02-12T12:57:50.586Z"
+														},
+														{
+															"key": "status",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "owner",
+							"item": [
+								{
+									"name": "{ownerId}",
+									"item": [
+										{
+											"name": "/api/audits/owner/:ownerId",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/audits/owner/:ownerId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"audits",
+														"owner",
+														":ownerId"
+													],
+													"variable": [
+														{
+															"key": "ownerId",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/audits/owner/:ownerId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"audits",
+																"owner",
+																":ownerId"
+															],
+															"variable": [
+																{
+																	"key": "ownerId",
+																	"value": "8205"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/audits",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"string\",\n  \"startDate\": \"1981-07-12T14:35:49.046Z\",\n  \"endDate\": \"1949-07-15T18:09:20.419Z\",\n  \"auditedArea\": \"string\",\n  \"ownerId\": 1145,\n  \"status\": 3608\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/audits",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"audits"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"string\",\n  \"startDate\": \"1981-07-12T14:35:49.046Z\",\n  \"endDate\": \"1949-07-15T18:09:20.419Z\",\n  \"auditedArea\": \"string\",\n  \"ownerId\": 1145,\n  \"status\": 3608\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/audits",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"audits"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/audits",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/audits",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"audits"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/audits",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"audits"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "findings",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/findings/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"description\": \"string\",\n  \"type\": 1,\n  \"severity\": 1,\n  \"detectionDate\": \"2001-12-30T17:53:33.732Z\",\n  \"ownerId\": 2003,\n  \"isClosed\": false,\n  \"closeDate\": \"2005-05-27T13:15:43.210Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/findings/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"findings",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"description\": \"string\",\n  \"type\": 1,\n  \"severity\": 1,\n  \"detectionDate\": \"2001-12-30T17:53:33.732Z\",\n  \"ownerId\": 2003,\n  \"isClosed\": false,\n  \"closeDate\": \"2005-05-27T13:15:43.210Z\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/findings/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"findings",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/findings/:id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/findings/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"findings",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/findings/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"findings",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 7956,\n  \"auditId\": 775,\n  \"audit\": {\n    \"id\": 7665,\n    \"title\": \"string\",\n    \"startDate\": \"1995-03-08T02:58:34.347Z\",\n    \"endDate\": \"1949-03-09T19:22:07.695Z\",\n    \"auditedArea\": \"string\",\n    \"ownerId\": 2865,\n    \"owner\": {\n      \"id\": 5839,\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"area\": \"string\",\n      \"createdAtUtc\": \"1966-07-07T04:38:29.232Z\"\n    },\n    \"status\": 0,\n    \"createdAtUtc\": \"2011-10-26T10:52:08.932Z\",\n    \"updatedAtUtc\": \"1990-03-20T22:05:41.308Z\",\n    \"findings\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Finding detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Finding detected>\"\n      }\n    ]\n  },\n  \"description\": \"string\",\n  \"type\": 0,\n  \"severity\": 2,\n  \"detectionDate\": \"1988-04-08T17:16:03.239Z\",\n  \"createdAtUtc\": \"2002-02-04T23:55:13.203Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/findings/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/findings/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"findings",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/findings/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"findings",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "by-audit",
+							"item": [
+								{
+									"name": "{auditId}",
+									"item": [
+										{
+											"name": "/api/findings/by-audit/:auditId",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/findings/by-audit/:auditId?severity=8205",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"findings",
+														"by-audit",
+														":auditId"
+													],
+													"query": [
+														{
+															"key": "severity",
+															"value": "8205"
+														}
+													],
+													"variable": [
+														{
+															"key": "auditId",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/findings/by-audit/:auditId?severity=8205",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"findings",
+																"by-audit",
+																":auditId"
+															],
+															"query": [
+																{
+																	"key": "severity",
+																	"value": "8205"
+																}
+															],
+															"variable": [
+																{
+																	"key": "auditId",
+																	"value": "8205"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/findings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"auditId\": 7431,\n  \"description\": \"string\",\n  \"type\": 0,\n  \"severity\": 0,\n  \"detectionDate\": \"1974-11-09T23:49:46.827Z\",\n  \"ownerId\": 6250,\n  \"isClosed\": true,\n  \"closeDate\": \"1976-07-12T11:40:42.360Z\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/findings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"findings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"auditId\": 7431,\n  \"description\": \"string\",\n  \"type\": 0,\n  \"severity\": 0,\n  \"detectionDate\": \"1974-11-09T23:49:46.827Z\",\n  \"ownerId\": 6250,\n  \"isClosed\": true,\n  \"closeDate\": \"1976-07-12T11:40:42.360Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/findings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"findings"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "owners",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/owners/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"area\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"area\": \"string\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/owners/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"owners",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/owners/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/owners/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8205"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/owners/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"owners",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "8205"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/owners",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"area\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/owners",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"owners"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"area\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/owners",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/owners",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"owners"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WeatherForecast",
+			"item": [
+				{
+					"name": "Get Weather Forecast",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/WeatherForecast",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WeatherForecast"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/WeatherForecast",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"WeatherForecast"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"date\": \"2004-07-03\",\n    \"temperatureC\": 3227,\n    \"temperatureF\": 150,\n    \"summary\": \"string\"\n  },\n  {\n    \"date\": \"1977-07-09\",\n    \"temperatureC\": 3183,\n    \"temperatureF\": 2410,\n    \"summary\": \"string\"\n  }\n]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
